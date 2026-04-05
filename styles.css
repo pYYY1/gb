@@ -190,26 +190,48 @@ img {
 .farewell-card {
   width: min(100%, 34rem);
   min-height: 18rem;
-  margin-top: 0.4rem;
+  max-height: 85vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   padding: 1.2rem;
+  padding-right: 1.5rem;
   border-radius: 1.8rem;
-  position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.06)),
-    url("https://images.unsplash.com/photo-1520975682031-ae0d4b8f0c16?auto=format&fit=crop&w=1200&q=80") center/cover;
+  transform: translate(-50%, -50%) translateY(24px) scale(0.98);
+  z-index: 2;
+  overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   opacity: 0;
-  transform: translateY(24px) scale(0.98);
   pointer-events: none;
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 249, 241, 0.42) rgba(255, 255, 255, 0.08);
+}
+
+.farewell-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.farewell-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.farewell-card::-webkit-scrollbar-thumb {
+  background: rgba(255, 249, 241, 0.42);
+  border-radius: 999px;
+  border: 2px solid rgba(24, 17, 13, 0.12);
+}
+
+.farewell-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 249, 241, 0.56);
 }
 
 .farewell-card__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(24, 17, 13, 0.28), rgba(24, 17, 13, 0.46));
+  display: none;
 }
 
 .farewell-card__content {
@@ -220,6 +242,12 @@ img {
   align-content: end;
   gap: 0.55rem;
   padding: 1rem;
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(180deg, rgba(24, 17, 13, 0.42), rgba(24, 17, 13, 0.58)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.06)),
+    url("https://images.unsplash.com/photo-1520975682031-ae0d4b8f0c16?auto=format&fit=crop&w=1200&q=80") center/cover;
+  background-attachment: local;
   color: #fff9f1;
 }
 
@@ -243,6 +271,10 @@ img {
   font-size: clamp(1.25rem, 3.5vw, 1.5rem);
   line-height: 1.2;
   max-width: 28rem;
+}
+
+.farewell-card__text + .farewell-card__text {
+  margin-top: 0.8rem;
 }
 
 .farewell-gallery {
@@ -325,9 +357,8 @@ img {
 
 .section-open .farewell-card {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate(-50%, -50%) translateY(0) scale(1);
   pointer-events: auto;
-  animation: revealCard 760ms var(--ease-out) both;
 }
 
 .section-open .farewell-card__content {
